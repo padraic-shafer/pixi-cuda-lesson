@@ -1,0 +1,16 @@
+The system default contains no modules
+  (env var: LMOD_SYSTEM_DEFAULT_MODULES is empty)
+  No changes in loaded modules
+
+++ hostname
++ echo -e '# Hello from Job  running on mars5.nsls2.bnl.gov\n'
++ echo -e '# GPUs assigned: 0\n'
++ echo -e '# Check to see if the NVIDIA drivers can correctly detect the GPU:\n'
++ nvidia-smi
++ nvidia-smi --query-gpu=name,compute_cap
++ echo -e '\n# Check if PyTorch can detect the GPU:\n'
++ pixi run --environment gpu python ./src/torch_detect_GPU.py
++ echo -e '\n# Check that the training code exists:\n'
++ ls -1ap ./src/
++ echo -e '\n# Train MNIST with PyTorch:\n'
++ pixi run --environment gpu python ./src/torch_MNIST.py --epochs 14 --data-dir ./data --save-model
