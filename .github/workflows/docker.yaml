@@ -7,18 +7,18 @@ on:
     tags:
       - 'v*'
     paths:
-      - 'cuda-example/pixi.toml'
-      - 'cuda-example/pixi.lock'
-      - 'cuda-example/Dockerfile'
-      - 'cuda-example/.dockerignore'
-      - 'cuda-example/app/**'
+      - 'cuda-exercise/pixi.toml'
+      - 'cuda-exercise/pixi.lock'
+      - 'cuda-exercise/Dockerfile'
+      - 'cuda-exercise/.dockerignore'
+      - 'cuda-exercise/app/**'
   pull_request:
     paths:
-      - 'cuda-example/pixi.toml'
-      - 'cuda-example/pixi.lock'
-      - 'cuda-example/Dockerfile'
-      - 'cuda-example/.dockerignore'
-      - 'cuda-example/app/**'
+      - 'cuda-exercise/pixi.toml'
+      - 'cuda-exercise/pixi.lock'
+      - 'cuda-exercise/Dockerfile'
+      - 'cuda-exercise/.dockerignore'
+      - 'cuda-exercise/app/**'
   release:
     types: [published]
   workflow_dispatch:
@@ -74,8 +74,8 @@ jobs:
         id: docker_build_test
         uses: docker/build-push-action@v6
         with:
-          context: cuda-example
-          file: cuda-example/Dockerfile
+          context: cuda-exercise
+          file: cuda-exercise/Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           pull: true
@@ -84,10 +84,9 @@ jobs:
         id: docker_build_deploy
         uses: docker/build-push-action@v6
         with:
-          context: cuda-example
-          file: cuda-example/Dockerfile
+          context: cuda-exercise
+          file: cuda-exercise/Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           pull: true
           push: ${{ github.event_name != 'pull_request' }}
-
